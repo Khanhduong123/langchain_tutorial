@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 import os
 from fastapi.staticfiles import StaticFiles
 import requests
-from ice_breaker import ice_break_with
+from basic_langchain.ice_breaker import ice_break_with
 load_dotenv()
 
 app = FastAPI()
