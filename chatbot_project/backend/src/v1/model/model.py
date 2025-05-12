@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Dict, Any
+from typing import List, Dict, Any,Optional
 
 class ChatMessage(BaseModel):
     message: str
@@ -10,3 +10,7 @@ class ChatResponse(BaseModel):
     answer: str
     sources: List[str]
     raw_sources: List[str]
+
+class DocumentUploadRequest(BaseModel):
+    file_name: str
+    description: Optional[str] = None
