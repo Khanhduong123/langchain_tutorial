@@ -12,6 +12,8 @@ def run_llm(query: str, chat_history: List[Dict[str, Any]] = []):
     embeddings = OpenAIEmbeddings(model="text-embedding-3-small",openai_api_key=os.getenv("OPENAI_API_KEY"))
     docsearch = PineconeVectorStore( index_name="langchain-doc-index",embedding=embeddings)
     chat = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, openai_api_key=os.getenv("OPENAI_API_KEY"))
+    
+    
     retrieval_qa_prompt = hub.pull("langchain-ai/retrieval-qa-chat")
     stuff_documents_chain = create_stuff_documents_chain(chat, retrieval_qa_prompt)
 
@@ -39,3 +41,5 @@ if __name__ == "__main__":
     query = "What is Pinecone?"
     result = run_llm(query)
     print(result)
+
+    pr
