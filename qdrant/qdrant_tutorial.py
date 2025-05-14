@@ -44,5 +44,50 @@ res = client.retrieve(
     with_vectors=True
 )
 
-for point in res:
-    print(point,"\n")
+fake_something = Faker()
+payload = []
+for i in range(1000):
+    payload.append(
+        {
+            "artist": fake_something.name(),
+            "song": " ".join(fake_something.words()),
+            "url_song": fake_something.url(),
+            "year": fake_something.year(),
+            "country": fake_something.country(),
+        }
+    )
+
+# #insert the payload into the collection
+# client.upsert(
+#     collection_name=my_collection_names,
+#     points=models.Batch(
+#         ids=index,
+#         vectors=data.tolist(),
+#         payloads=payload
+#     )
+# )
+
+living_la_vida_loca = np.random.uniform(low=-1, high=1, size=(100)).tolist()
+
+print(client.search(
+    collection_name=my_collection_names,
+    query_vector=living_la_vida_loca,
+#     limit=5,
+#     with_payload=True
+))
+
+aussie_songs = models.Filter(
+    must=[
+        models.FieldCondition(
+            key="country",
+            match=models.MatchValue(value="Australia")
+        )
+    ]
+)
+
+print(client.search(
+    collection_name=my_collection_names,
+    query_vector=living_la_vida_loca,
+    filter=aussie_songs,
+    limit=3
+))
