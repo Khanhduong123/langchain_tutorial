@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders import TextLoader
 from langchain_openai import OpenAIEmbeddings
-from langchain_pinecone import Pinecone
 from langchain_pinecone import PineconeVectorStore
 
 load_dotenv()
