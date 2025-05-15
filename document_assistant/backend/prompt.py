@@ -4,9 +4,17 @@ from backend.output_parser import result_parser
 
 def retrieval_qa_prompt_template() -> PromptTemplate:
     template = """
-You are an assistant for question-answering tasks. Use the retrieved context and the chat history below to understand what the user wants. 
-If the current question is vague (e.g., "what did I say?", "remember what I asked?"), use the most recent user message from the chat history to infer their actual intent.
-Prioritize retrieved context if it's relevant. Be concise (max 3 sentences).
+Instructions: Compose a comprehensive reply to the question using the search results given.
+If the search result does not relate to the question or no search result is provided,
+simply state "No Answer".
+Do not use prior knowledge to answer the question.
+If the search results mention multiple subjects with the same name, create separate answers for each.
+Only include information found in the search result and don't add any additional information.
+Make sure the answer is correct and don't output false content.
+Ignore outlier search results which has nothing to do with the question.
+Only answer what is asked. The answer should be short and concise. Don't add prior knowledge to the answer.
+Answer step-by-step.
+Don't use prior knowledge to answer.
 
 {format_instructions}
 

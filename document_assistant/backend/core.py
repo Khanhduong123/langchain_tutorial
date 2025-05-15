@@ -18,8 +18,11 @@ def run_llm(query: str, chat_history: List[Dict[str, Any]] = []):
     retrieval_qa_prompt = retrieval_qa_prompt_template()
     chain = retrieval_qa_prompt | chat | result_parser
     result = chain.invoke({"chat_history":chat_history,"question": query, "context": contexts})
+
+    if result.answer.strip().lower() == "no answer":
+        contexts = []
     
-    return result
+    return result, contexts
 
 
 if __name__ == "__main__":
