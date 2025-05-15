@@ -1,15 +1,20 @@
 from pydantic import BaseModel
 from typing import List, Dict, Any,Optional
-
+from langchain.schema.messages import BaseMessage
 class ChatMessage(BaseModel):
-    message: str
-    chat_history: List[Dict[str, Any]]
+    role: str  # "user" | "assistant"
+    content: str
+
+class ChatRequest(BaseModel):
+    query: str
+    
+class SourceDocument(BaseModel):
+    source: str
 
 class ChatResponse(BaseModel):
-    query: str
     answer: str
-    sources: List[str]
-    raw_sources: List[str]
+    contexts: List[SourceDocument] = []
+    chat_history:  List[BaseMessage] = [] 
 
 class DocumentUploadRequest(BaseModel):
     file_name: str

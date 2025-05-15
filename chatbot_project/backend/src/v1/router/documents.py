@@ -34,7 +34,6 @@ async def upload_document(file: UploadFile):
     return {"filename": file.filename, "size": file_path.stat().st_size}
 
 @router.get("/ingest")
-@router.get("/ingest")
 async def ingest_all_uploaded_documents():
     txt_dir = UPLOAD_DIR / "txt"
     pdf_dir = UPLOAD_DIR / "pdf"
