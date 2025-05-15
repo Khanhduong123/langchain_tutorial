@@ -17,10 +17,14 @@ def run_llm(query: str, chat_history: List[Dict[str, Any]] = []):
     contexts = retriever.invoke(query)
     retrieval_qa_prompt = retrieval_qa_prompt_template()
     chain = retrieval_qa_prompt | chat | result_parser
+<<<<<<< HEAD
     result = chain.invoke({"chat_history":chat_history,"question": query, "context": contexts})
 
     if result.answer.strip().lower() == "no answer":
         contexts = []
+=======
+    result = chain.invoke({"chat_history":chat_history,"question": query, "context": contexts}
+>>>>>>> c8baf98aba7576ff6474c7ed29475d9862e893c9
     
     return result, contexts
 
@@ -29,3 +33,4 @@ if __name__ == "__main__":
     query = "What is Pinecone?"
     result = run_llm(query)
     print(result.answer)
+    print(result)
